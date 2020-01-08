@@ -1,0 +1,6 @@
+[submodule "Fuz-Ro-D-oh-64"]
+	path = Fuz-Ro-D-oh-64
+	url = https://github.com/TESSkyblivion/Fuz-Ro-D-oh-64.git
+[submodule "CommonLibSSE"]
+	path = CommonLibSSE
+	url = https://github.com/Ryan-rsm-McKenzie/CommonLibSSE.git

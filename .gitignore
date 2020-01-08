@@ -1,5 +1,6 @@
 skse64_src/**
 !skse64_src/skse64/
+!skse64_src/skse64/skse64_license.txt
 !skse64_src/skse64/common/
 !skse64_src/skse64/common/common_vc14.vcxproj
 !skse64_src/skse64/skse64/
