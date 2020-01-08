@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "skse64_common", "skse64_src\skse64\skse64_common\skse64_common.vcxproj", "{5FD1C08D-DB80-480C-A1C6-F0920005CD13}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "skse64_steam_loader", "skse64_src\skse64\skse64_steam_loader\skse64_steam_loader.vcxproj", "{F592B749-2333-4C63-9E97-0EB8FEC4D734}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "skse64", "skse64_src\skse64\skse64\skse64.vcxproj", "{7028B79C-06E3-4D9A-B38C-1DC3680B1BDB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonLibSSE", "CommonLibSSE\CommonLibSSE.vcxproj", "{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,20 +61,17 @@ Global
 		{7028B79C-06E3-4D9A-B38C-1DC3680B1BDB}.Release|x64.ActiveCfg = Release|x64
 		{7028B79C-06E3-4D9A-B38C-1DC3680B1BDB}.Release|x64.Build.0 = Release|x64
 		{7028B79C-06E3-4D9A-B38C-1DC3680B1BDB}.Release|x86.ActiveCfg = Release|x64
+		{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}.Debug|x64.ActiveCfg = Debug|x64
+		{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}.Debug|x64.Build.0 = Debug|x64
+		{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}.Debug|x86.ActiveCfg = Debug|x64
+		{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}.Release|x64.ActiveCfg = Release|x64
+		{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}.Release|x64.Build.0 = Release|x64
+		{C1AF9204-EE2D-421B-B11E-1D70D8ACC11F}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 5
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\common\\common_vc14.vcxproj
-		SccLocalPath1 = ..\\common
-		SccProjectUniqueName2 = skse64_common\\skse64_common.vcxproj
-		SccLocalPath2 = skse64_common
-		SccProjectUniqueName3 = skse64_loader_common\\skse64_loader_common.vcxproj
-		SccLocalPath3 = skse64_loader_common
-		SccProjectUniqueName4 = skse64\\skse64.vcxproj
-		SccLocalPath4 = skse64
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {481DC211-4E0F-47D3-B078-7A87D002A68E}
 	EndGlobalSection
 EndGlobal
