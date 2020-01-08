@@ -15,4 +15,5 @@ skse64_src/**
 !skse64_src/skse64/skse64_steam_loader/skse64_steam_loader.vcxproj
 x64/
 x64_v140/
+x64_v142/
 .vs

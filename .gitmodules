@@ -4,3 +4,6 @@
 [submodule "CommonLibSSE"]
 	path = CommonLibSSE
 	url = https://github.com/TESSkyblivion/CommonLibSSE.git
+[submodule "SME-Sundries"]
+	path = SME-Sundries
+	url = https://github.com/shadeMe/SME-Sundries.git
