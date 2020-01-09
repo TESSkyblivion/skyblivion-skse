@@ -13,6 +13,9 @@ skse64_src/**
 !skse64_src/skse64/skse64_loader_common/skse64_loader_common.vcxproj
 !skse64_src/skse64/skse64_steam_loader/
 !skse64_src/skse64/skse64_steam_loader/skse64_steam_loader.vcxproj
+
+main/x64
+
 x64/
 x64_v140/
 x64_v142/
