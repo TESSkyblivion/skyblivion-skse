@@ -70,12 +70,6 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(Skyrim64Path)\$(TargetFileName)" /Y</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Installing DLL...</Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -96,12 +90,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "$(Skyrim64Path)\$(TargetFileName)" /Y</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Installing DLL...</Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BSModelDB.cpp" />
