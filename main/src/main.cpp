@@ -13,6 +13,7 @@
 __declspec(dllimport) double g_silent_voice_duration_seconds;
 __declspec(dllimport) int g_is_obscript_say_say_to;
 
+
 //NativeFunction* stopFunction = NULL;
 
 namespace RE {
