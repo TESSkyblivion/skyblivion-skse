@@ -19,13 +19,13 @@ __declspec(dllimport) int g_is_obscript_say_say_to;
 namespace RE {
 	namespace ObScriptHooks {
 
-		BSScript::IFunction* questStopFunction;
-
-		void ObScriptCommand(std::string_view a_command) {
-
-		}
-
-
+		SCRIPT_FUNCTION* isAnimPlayingFunction = NULL;
+		SCRIPT_FUNCTION::ScriptData isAnimPlayingFunctionData =
+		{
+			0x1128,
+			0x0001,
+			0x0000
+		};
 
 		float ObScriptSay(TESQuest*, TESObjectREFR* thisActor, TESTopic* TopicID)
 		{
@@ -118,6 +118,23 @@ namespace RE {
 		}
 
 		bool isAnimPlaying(TESObjectREFR* animatedRefr) {
+			if (isAnimPlayingFunction)
+			{
+				double result = 0.0;
+				UInt32 opcodeOffset = 0x4;
+				
+				isAnimPlayingFunction->executeFunction(
+					isAnimPlayingFunction->params,
+					&isAnimPlayingFunctionData,
+					animatedRefr,
+					NULL,
+					NULL,
+					NULL,
+					result,
+					opcodeOffset
+				);
+				return (result != 0.0);
+			}
 			return false;
 		}
 
@@ -130,13 +147,21 @@ namespace RE {
 			_MESSAGE("Initializing ObScript hooks...");
 
 			a_vm->RegisterFunction("PrepareForReinitializing", "Quest", prepareForReinitializing);
-			a_vm->RegisterFunction("IsAnimPlaying", "ObjectReference", isAnimPlaying);
+			
 			a_vm->RegisterFunction("GetDestroyed", "ObjectReference", getDestroyed);
 			a_vm->RegisterFunction("ObScriptSayTo", "TES4TimerHelper", ObScriptSayTo);
 			a_vm->RegisterFunction("ObScriptSay", "TES4TimerHelper", ObScriptSay);
 			a_vm->RegisterFunction("GetAmountSoldStolen", "Game", getAmountSoldStolen);
 			a_vm->RegisterFunction("ModAmountSoldStolen", "Game", modAmountSoldStolen);
 			a_vm->RegisterFunction("IsPCAMurderer", "Game", isPCAMurderer);
+
+			_MESSAGE("Looking for IsAnimPlaying execute handler");
+			isAnimPlayingFunction = SCRIPT_FUNCTION::LocateScriptCommand("IsAnimPlaying");
+			if (NULL == isAnimPlayingFunction)
+			{
+				_ERROR("Unable to find isAnimPlayingFunction!");
+			}
+			a_vm->RegisterFunction("IsAnimPlaying", "ObjectReference", isAnimPlaying);
 
 			_MESSAGE("Initializing ObScript hooks done");
 
