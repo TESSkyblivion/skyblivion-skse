@@ -27,6 +27,14 @@ namespace RE {
 			0x0000
 		};
 
+		SCRIPT_FUNCTION* getDestroyedFunction = NULL;
+		SCRIPT_FUNCTION::ScriptData getDestroyedFunctionData =
+		{
+			0x10CB,
+			0x0001,
+			0x0000
+		};
+
 		float ObScriptSay(TESQuest*, TESObjectREFR* thisActor, TESTopic* TopicID)
 		{
 			double result = 0.0;
@@ -52,7 +60,7 @@ namespace RE {
 
 			g_is_obscript_say_say_to = true;
 
-			script->Invoke(thisActor, RE::Script::InvokeType::kDefaultCompiler);
+			script->Invoke(thisActor, RE::Script::InvokeType::kSysWindowCompileAndRun);
 
 			g_is_obscript_say_say_to = false;
 
@@ -88,7 +96,7 @@ namespace RE {
 
 			g_is_obscript_say_say_to = true;
 
-			script->Invoke(thisActor, Script::InvokeType::kDefaultCompiler);
+			script->Invoke(thisActor, Script::InvokeType::kSysWindowCompileAndRun);
 
 			g_is_obscript_say_say_to = false;
 
@@ -101,7 +109,7 @@ namespace RE {
 		bool prepareForReinitializing(TESQuest* a_form)
 		{
 			a_form->alreadyRun = false;
-			a_form->ClearData();
+			//TODO: stop
 			return true;
 		}
 
@@ -138,8 +146,26 @@ namespace RE {
 			return false;
 		}
 
+		//TODO: CHECK: should be Double?
 		UInt32 getDestroyed(TESObjectREFR* reference) {
-			return ((reference->loadedData->flags & 0x800000) == 0x800000) ? 1 : 0;
+			if (getDestroyedFunction)
+			{
+				double result = 0.0;
+				UInt32 opcodeOffset = 0x4;
+
+				getDestroyedFunction->executeFunction(
+					getDestroyedFunction->params,
+					&getDestroyedFunctionData,
+					reference,
+					NULL,
+					NULL,
+					NULL,
+					result,
+					opcodeOffset
+				);
+				return (result != 0.0);
+			}
+			return 0;
 		}
 
 		bool RegisterFuncs(BSScript::Internal::VirtualMachine* a_vm) {
@@ -148,7 +174,7 @@ namespace RE {
 
 			a_vm->RegisterFunction("PrepareForReinitializing", "Quest", prepareForReinitializing);
 			
-			a_vm->RegisterFunction("GetDestroyed", "ObjectReference", getDestroyed);
+			
 			a_vm->RegisterFunction("ObScriptSayTo", "TES4TimerHelper", ObScriptSayTo);
 			a_vm->RegisterFunction("ObScriptSay", "TES4TimerHelper", ObScriptSay);
 			a_vm->RegisterFunction("GetAmountSoldStolen", "Game", getAmountSoldStolen);
@@ -162,6 +188,15 @@ namespace RE {
 				_ERROR("Unable to find isAnimPlayingFunction!");
 			}
 			a_vm->RegisterFunction("IsAnimPlaying", "ObjectReference", isAnimPlaying);
+
+			_MESSAGE("Looking for IsAnimPlaying execute handler");
+
+			getDestroyedFunction = SCRIPT_FUNCTION::LocateScriptCommand("GetDestroyed");			
+			if (NULL == getDestroyedFunction)
+			{
+				_ERROR("Unable to find getDestroyedFunction!");
+			}
+			a_vm->RegisterFunction("GetDestroyed", "ObjectReference", getDestroyed);
 
 			_MESSAGE("Initializing ObScript hooks done");
 
